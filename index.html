@@ -50,7 +50,7 @@
     header .tagline{font-family:'Noto Serif',serif;font-style:italic;color: #D0D6DD;
       font-size:1rem;letter-spacing:0.04em;margin-bottom:28px;}
     .header-nav{
-  display:none;
+  display:flex;
   position:absolute;
   top:60px;
   left:20px;
@@ -69,12 +69,13 @@
 
   opacity:0;
   transform:translateY(-10px);
+  pointer-events:none;
   transition:all 0.3s ease;
 }
     .header-nav.show{
-  display:flex;
   opacity:1;
   transform:translateY(0);
+  pointer-events:auto;
 }
     .nav-link{font-size:0.75rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);
       text-decoration:none;padding:5px 14px;border:1px solid rgba(255,255,255,0.07);
@@ -701,7 +702,10 @@ function openModalFor(name) {
   modal.setAttribute("aria-hidden", "false");
   document.body.style.overflow = "hidden";
 }
-
+function toggleMenu() {
+  const nav = document.querySelector(".header-nav");
+  nav.classList.toggle("show");
+}
 function closeModal() {
   modal.setAttribute("aria-hidden", "true");
   document.body.style.overflow = "";
