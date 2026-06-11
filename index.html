@@ -67,9 +67,9 @@
 
   min-width:160px;
 
-  opacity:0;
+  opacity: 1;
   transform:translateY(-10px);
-  pointer-events:none;
+  pointer-events: auto;
   transition:all 0.3s ease;
 }
     .header-nav.show{
@@ -288,7 +288,21 @@
 
   <!-- HAMBURGER MENU -->
   <div style="position:absolute;left:20px;top:20px;">
-    <button onclick="toggleMenu()" style="font-size:20px;background:none;border:none;color:white;cursor:pointer;">☰</button>
+    <button onclick="toggleMenu()" style="
+  font-size:26px;
+  background:rgba(255,255,255,0.1);
+  border:1px solid rgba(255,255,255,0.2);
+  color:white;
+  cursor:pointer;
+  padding:6px 10px;
+  border-radius:8px;
+">
+☰
+</button>
+
+<span style="position:absolute;top:45px;left:0;color:#ddd;font-size:10px;">
+      menu
+    </span>
   </div>
 
   <div class="header-ornament" aria-hidden="true">
