@@ -338,6 +338,22 @@
 
 <!-- LAYER 4: FILTER + GRID KARTU TOKOH -->
 <section id="tokoh" aria-label="Daftar tokoh">
+   <div style="text-align:center; padding: 10px 24px 0;">
+    <input 
+      type="text" 
+      id="searchInput"
+      placeholder="Cari tokoh (contoh: Ibnu Sina, Al-Biruni...)"
+      style="
+        width: min(500px, 90%);
+        padding: 10px 14px;
+        border-radius: 30px;
+        border: 1px solid #5E6F82;
+        outline: none;
+        font-family: Lato;
+        font-size: 0.9rem;
+      "
+    />
+  </div>
   <div class="filter-bar" role="group" aria-label="Filter bidang ilmu">
     <button class="filter-btn active" data-filter="all">Semua</button>
     <button class="filter-btn" data-filter="matematika">Matematika</button>
@@ -480,38 +496,71 @@ const quotes=[
 ];
 
 function renderCards(filter){
-  filter=filter||'all';
-  const grid=document.getElementById('grid');
-  const countLabel=document.getElementById('countLabel');
-  const filtered=filter==='all'?tokohData:tokohData.filter(function(t){return t.field===filter;});
-  countLabel.textContent=filtered.length+' tokoh';
-  grid.innerHTML='';
+  filter = filter || 'all';
+
+  const grid = document.getElementById('grid');
+  const countLabel = document.getElementById('countLabel');
+
+  let filtered = tokohData;
+
+  // filter bidang
+  if (filter !== 'all') {
+    filtered = filtered.filter(t => t.field === filter);
+  }
+
+  // filter search
+  if (searchQuery.trim() !== "") {
+    filtered = filtered.filter(t =>
+      t.name.toLowerCase().includes(searchQuery) ||
+      t.bio.toLowerCase().includes(searchQuery) ||
+      t.fieldLabel.toLowerCase().includes(searchQuery)
+    );
+  }
+
+  countLabel.textContent = filtered.length + ' tokoh';
+  grid.innerHTML = '';
+
   filtered.forEach(function(tokoh){
-    const card=document.createElement('article');
-    card.className='card'; card.dataset.name=tokoh.name;
-    card.setAttribute('tabindex','0'); card.setAttribute('role','listitem');
-    card.setAttribute('aria-label',tokoh.name+', '+tokoh.fieldLabel);
-    const imageHtml=tokoh.image
-      ?'<div class="card-image" style="background-image:url(\''+tokoh.image+'\')"></div>'
-      :'<div class="card-image-placeholder" aria-hidden="true">'+tokoh.initial+'</div>';
-    card.innerHTML=imageHtml+
-      '<div class="card-body">'+
-        '<span class="card-badge">'+tokoh.fieldLabel+'</span>'+
-        '<h2>'+tokoh.name+'</h2>'+
-        '<p class="card-year">'+tokoh.years+'</p>'+
-        '<p>'+tokoh.bio+'</p>'+
-        '<div class="card-footer">'+
-          '<span class="card-field">&#128220; '+tokoh.works.length+' karya</span>'+
-          '<button class="more" aria-label="Lihat detail '+tokoh.name+'">Selengkapnya</button>'+
-        '</div>'+
-      '</div>';
-    card.querySelector('.more').addEventListener('click',function(e){e.stopPropagation();openModalFor(tokoh.name);});
-    card.addEventListener('click',function(){openModalFor(tokoh.name);});
-    card.addEventListener('keydown',function(e){if(e.key==='Enter'||e.key===' '){e.preventDefault();openModalFor(tokoh.name);}});
+    const card = document.createElement('article');
+    card.className = 'card';
+    card.dataset.name = tokoh.name;
+    card.setAttribute('tabindex','0');
+    card.setAttribute('role','listitem');
+
+    const imageHtml = tokoh.image
+      ? `<div class="card-image" style="background-image:url('${tokoh.image}')"></div>`
+      : `<div class="card-image-placeholder">${tokoh.initial}</div>`;
+
+    card.innerHTML = imageHtml + `
+      <div class="card-body">
+        <span class="card-badge">${tokoh.fieldLabel}</span>
+        <h2>${tokoh.name}</h2>
+        <p class="card-year">${tokoh.years}</p>
+        <p>${tokoh.bio}</p>
+        <div class="card-footer">
+          <span class="card-field">📜 ${tokoh.works.length} karya</span>
+          <button class="more">Selengkapnya</button>
+        </div>
+      </div>
+    `;
+
+    card.querySelector('.more').addEventListener('click', function(e){
+      e.stopPropagation();
+      openModalFor(tokoh.name);
+    });
+
+    card.addEventListener('click', function(){
+      openModalFor(tokoh.name);
+    });
+
     grid.appendChild(card);
   });
 }
-
+function applyFilters(){
+  const activeBtn = document.querySelector('.filter-btn.active');
+  const filter = activeBtn ? activeBtn.dataset.filter : 'all';
+  renderCards(filter);
+}
 document.querySelectorAll('.filter-btn').forEach(function(btn){
   btn.addEventListener('click',function(){
     document.querySelectorAll('.filter-btn').forEach(function(b){b.classList.remove('active');});
@@ -600,8 +649,16 @@ modalClose.addEventListener('click',closeModal);
 modalBackdrop.addEventListener('click',closeModal);
 document.addEventListener('keydown',function(e){if(e.key==='Escape'&&modal.getAttribute('aria-hidden')==='false')closeModal();});
 
-renderCards();
+let searchQuery = "";
 
+const searchInput = document.getElementById("searchInput");
+
+searchInput.addEventListener("input", function (e) {
+  searchQuery = e.target.value.toLowerCase();
+  applyFilters();
+});
+renderCards();
+applyFilters();
 function toggleMenu(){
   const nav = document.querySelector('.header-nav');
   nav.classList.toggle('show');
