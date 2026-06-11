@@ -488,27 +488,33 @@ const tokohData=[
    source:{text:"Wikipedia - Ibnu Rusyd",url:"https://id.wikipedia.org/wiki/Ibnu_Rusyd"}}
 ];
 
-const quotes=[
+const quotes = [
   {text:"Mencari ilmu adalah kewajiban setiap Muslim.",attr:"— Hadis Riwayat Ibnu Majah"},
   {text:"Barangsiapa menempuh jalan untuk mencari ilmu, Allah akan mudahkan baginya jalan menuju surga.",attr:"— Hadis Riwayat Muslim"},
   {text:"Tinta seorang ilmuwan lebih suci daripada darah syuhada.",attr:"— Pepatah Islam Klasik"},
   {text:"Ilmu adalah kehidupan Islam dan tiang keimanan.",attr:"— Imam Ali bin Abi Thalib"}
 ];
 
-function renderCards(filter){
-  filter = filter || 'all';
+// STATE
+let searchQuery = "";
+let activeFilter = "all";
+let qIdx = 0;
 
-  const grid = document.getElementById('grid');
-  const countLabel = document.getElementById('countLabel');
+// ELEMENTS
+const grid = document.getElementById("grid");
+const countLabel = document.getElementById("countLabel");
+const searchInput = document.getElementById("searchInput");
 
+// ================= FILTER + SEARCH =================
+function getFilteredData() {
   let filtered = tokohData;
 
   // filter bidang
-  if (filter !== 'all') {
-    filtered = filtered.filter(t => t.field === filter);
+  if (activeFilter !== "all") {
+    filtered = filtered.filter(t => t.field === activeFilter);
   }
 
-  // filter search
+  // search
   if (searchQuery.trim() !== "") {
     filtered = filtered.filter(t =>
       t.name.toLowerCase().includes(searchQuery) ||
@@ -517,21 +523,26 @@ function renderCards(filter){
     );
   }
 
-  countLabel.textContent = filtered.length + ' tokoh';
-  grid.innerHTML = '';
+  return filtered;
+}
 
-  filtered.forEach(function(tokoh){
-    const card = document.createElement('article');
-    card.className = 'card';
-    card.dataset.name = tokoh.name;
-    card.setAttribute('tabindex','0');
-    card.setAttribute('role','listitem');
+function renderCards() {
+  const data = getFilteredData();
+
+  countLabel.textContent = `${data.length} tokoh`;
+  grid.innerHTML = "";
+
+  data.forEach(tokoh => {
+    const card = document.createElement("article");
+    card.className = "card";
+    card.setAttribute("tabindex", "0");
 
     const imageHtml = tokoh.image
       ? `<div class="card-image" style="background-image:url('${tokoh.image}')"></div>`
       : `<div class="card-image-placeholder">${tokoh.initial}</div>`;
 
-    card.innerHTML = imageHtml + `
+    card.innerHTML = `
+      ${imageHtml}
       <div class="card-body">
         <span class="card-badge">${tokoh.fieldLabel}</span>
         <h2>${tokoh.name}</h2>
@@ -544,125 +555,168 @@ function renderCards(filter){
       </div>
     `;
 
-    card.querySelector('.more').addEventListener('click', function(e){
+    card.querySelector(".more").addEventListener("click", (e) => {
       e.stopPropagation();
       openModalFor(tokoh.name);
     });
 
-    card.addEventListener('click', function(){
-      openModalFor(tokoh.name);
-    });
+    card.addEventListener("click", () => openModalFor(tokoh.name));
 
     grid.appendChild(card);
   });
 }
-function applyFilters(){
-  const activeBtn = document.querySelector('.filter-btn.active');
-  const filter = activeBtn ? activeBtn.dataset.filter : 'all';
-  renderCards(filter);
-}
-document.querySelectorAll('.filter-btn').forEach(function(btn){
-  btn.addEventListener('click',function(){
-    document.querySelectorAll('.filter-btn').forEach(function(b){b.classList.remove('active');});
-    btn.classList.add('active');
-    renderCards(btn.dataset.filter);
+
+// ================= FILTER BUTTON =================
+document.querySelectorAll(".filter-btn").forEach(btn => {
+  btn.addEventListener("click", () => {
+    document.querySelectorAll(".filter-btn")
+      .forEach(b => b.classList.remove("active"));
+
+    btn.classList.add("active");
+    activeFilter = btn.dataset.filter;
+
+    renderCards();
   });
 });
 
-var qIdx=0;
-function showQuote(i){
-  var qt=document.getElementById('quoteText');
-  var qa=document.getElementById('quoteAttr');
-  qt.style.opacity='0'; qa.style.opacity='0';
-  setTimeout(function(){
-    qt.textContent='"'+quotes[i].text+'"';
-    qa.textContent=quotes[i].attr;
-    qt.style.transition='opacity 0.5s'; qa.style.transition='opacity 0.5s';
-    qt.style.opacity='1'; qa.style.opacity='1';
-  },300);
-  document.querySelectorAll('.q-dot').forEach(function(d,j){
-    d.style.background=j===i?'var(--gold)':'rgba(201,169,110,0.2)';
+// ================= SEARCH =================
+searchInput.addEventListener("input", (e) => {
+  searchQuery = e.target.value.toLowerCase();
+  renderCards();
+});
+
+// ================= QUOTE =================
+function showQuote(i) {
+  const qt = document.getElementById("quoteText");
+  const qa = document.getElementById("quoteAttr");
+
+  qt.style.opacity = 0;
+  qa.style.opacity = 0;
+
+  setTimeout(() => {
+    qt.textContent = `"${quotes[i].text}"`;
+    qa.textContent = quotes[i].attr;
+
+    qt.style.opacity = 1;
+    qa.style.opacity = 1;
+  }, 250);
+
+  document.querySelectorAll(".q-dot").forEach((d, j) => {
+    d.style.background =
+      j === i ? "var(--gold)" : "rgba(201,169,110,0.2)";
   });
 }
-var dotsEl=document.getElementById('quoteDots');
-quotes.forEach(function(_,i){
-  var d=document.createElement('button');
-  d.className='q-dot';
-  d.style.cssText='width:8px;height:8px;border-radius:50%;border:none;cursor:pointer;background:'+(i===0?'var(--gold)':'rgba(201,169,110,0.2)')+';padding:0;transition:background 0.3s;';
-  d.setAttribute('aria-label','Kutipan '+(i+1));
-  d.addEventListener('click',function(){qIdx=i;showQuote(i);});
+
+const dotsEl = document.getElementById("quoteDots");
+
+quotes.forEach((_, i) => {
+  const d = document.createElement("button");
+  d.className = "q-dot";
+  d.style.cssText =
+    "width:8px;height:8px;border-radius:50%;border:none;cursor:pointer;margin:0 4px;background:" +
+    (i === 0 ? "var(--gold)" : "rgba(201,169,110,0.2)");
+
+  d.addEventListener("click", () => {
+    qIdx = i;
+    showQuote(i);
+  });
+
   dotsEl.appendChild(d);
 });
-setInterval(function(){qIdx=(qIdx+1)%quotes.length;showQuote(qIdx);},5000);
 
-var sorted=tokohData.slice().sort(function(a,b){return a.startYear-b.startYear;});
-var container=document.getElementById('timelineContainer');
-sorted.forEach(function(t,i){
-  var item=document.createElement('div');
-  item.className='tl-item';
-  var isOdd=i%2===0;
-  item.innerHTML=isOdd
-    ?'<div class="tl-card"><div class="tl-name">'+t.name+'</div><div class="tl-year">'+t.years+'</div><div class="tl-desc">'+t.contribution+'</div></div><div class="tl-dot"></div><div class="tl-spacer"></div>'
-    :'<div class="tl-spacer"></div><div class="tl-dot"></div><div class="tl-card"><div class="tl-name">'+t.name+'</div><div class="tl-year">'+t.years+'</div><div class="tl-desc">'+t.contribution+'</div></div>';
+setInterval(() => {
+  qIdx = (qIdx + 1) % quotes.length;
+  showQuote(qIdx);
+}, 5000);
+
+// ================= TIMELINE =================
+const sorted = [...tokohData].sort((a, b) => a.startYear - b.startYear);
+const container = document.getElementById("timelineContainer");
+
+sorted.forEach((t, i) => {
+  const item = document.createElement("div");
+  item.className = "tl-item";
+
+  const left = `
+    <div class="tl-card">
+      <div class="tl-name">${t.name}</div>
+      <div class="tl-year">${t.years}</div>
+      <div class="tl-desc">${t.contribution}</div>
+    </div>
+    <div class="tl-dot"></div>
+    <div class="tl-spacer"></div>
+  `;
+
+  const right = `
+    <div class="tl-spacer"></div>
+    <div class="tl-dot"></div>
+    <div class="tl-card">
+      <div class="tl-name">${t.name}</div>
+      <div class="tl-year">${t.years}</div>
+      <div class="tl-desc">${t.contribution}</div>
+    </div>
+  `;
+
+  item.innerHTML = i % 2 === 0 ? left : right;
   container.appendChild(item);
 });
 
-var modal=document.getElementById('modal');
-var modalBackdrop=document.getElementById('modalBackdrop');
-var modalClose=document.getElementById('modalClose');
-var modalImage=document.getElementById('modalImage');
-var modalTitle=document.getElementById('modalTitle');
-var modalMeta=document.getElementById('modalMeta');
-var modalBio=document.getElementById('modalBio');
-var modalWorks=document.getElementById('modalWorks');
-var modalSource=document.getElementById('modalSource');
+// ================= MODAL =================
+const modal = document.getElementById("modal");
+const modalBackdrop = document.getElementById("modalBackdrop");
+const modalClose = document.getElementById("modalClose");
+const modalImage = document.getElementById("modalImage");
+const modalTitle = document.getElementById("modalTitle");
+const modalMeta = document.getElementById("modalMeta");
+const modalBio = document.getElementById("modalBio");
+const modalWorks = document.getElementById("modalWorks");
+const modalSource = document.getElementById("modalSource");
 
-function openModalFor(name){
-  var data=null;
-  tokohData.forEach(function(t){if(t.name===name)data=t;});
-  if(!data){
-    modalTitle.textContent=name; modalMeta.textContent='';
-    modalBio.textContent='Informasi belum tersedia.';
-    modalWorks.innerHTML='<li>Belum ada data</li>';
-    modalImage.style.backgroundImage=''; modalImage.innerHTML='';
-    modalSource.innerHTML='Sumber: -';
+function openModalFor(name) {
+  const data = tokohData.find(t => t.name === name);
+
+  if (!data) return;
+
+  modalTitle.textContent = data.name;
+  modalMeta.textContent = `${data.fieldLabel} - ${data.years}`;
+  modalBio.textContent = data.bio;
+
+  modalWorks.innerHTML = data.works
+    .map(w => `<li>${w.title} <em style="color:var(--silver-blue)">- ${w.year}</em></li>`)
+    .join("");
+
+  if (data.image) {
+    modalImage.className = "modal-image";
+    modalImage.style.backgroundImage = `url('${data.image}')`;
+    modalImage.innerHTML = "";
   } else {
-    modalTitle.textContent=data.name;
-    modalMeta.textContent=data.fieldLabel+' - '+data.years;
-    modalBio.textContent=data.bio;
-    modalWorks.innerHTML=data.works.map(function(w){return '<li>'+w.title+' <em style="color:var(--silver-blue)">- '+w.year+'</em></li>';}).join('');
-    if(data.image){
-      modalImage.style.backgroundImage='url(\''+data.image+'\')';
-      modalImage.innerHTML=''; modalImage.className='modal-image';
-    } else {
-      modalImage.className=''; modalImage.style.backgroundImage='';
-      modalImage.innerHTML='<div class="modal-image-placeholder" aria-hidden="true">'+data.initial+'</div>';
-    }
-    modalSource.innerHTML='Sumber: <a href="'+data.source.url+'" target="_blank" rel="noopener">'+data.source.text+'</a>';
+    modalImage.className = "";
+    modalImage.innerHTML =
+      `<div class="modal-image-placeholder">${data.initial}</div>`;
   }
-  modal.setAttribute('aria-hidden','false');
-  modalClose.focus();
-  document.body.style.overflow='hidden';
+
+  modalSource.innerHTML =
+    `Sumber: <a href="${data.source.url}" target="_blank" rel="noopener">${data.source.text}</a>`;
+
+  modal.setAttribute("aria-hidden", "false");
+  document.body.style.overflow = "hidden";
 }
-function closeModal(){modal.setAttribute('aria-hidden','true');document.body.style.overflow='';}
-modalClose.addEventListener('click',closeModal);
-modalBackdrop.addEventListener('click',closeModal);
-document.addEventListener('keydown',function(e){if(e.key==='Escape'&&modal.getAttribute('aria-hidden')==='false')closeModal();});
 
-let searchQuery = "";
+function closeModal() {
+  modal.setAttribute("aria-hidden", "true");
+  document.body.style.overflow = "";
+}
 
-const searchInput = document.getElementById("searchInput");
+modalClose.addEventListener("click", closeModal);
+modalBackdrop.addEventListener("click", closeModal);
 
-searchInput.addEventListener("input", function (e) {
-  searchQuery = e.target.value.toLowerCase();
-  applyFilters();
+document.addEventListener("keydown", (e) => {
+  if (e.key === "Escape") closeModal();
 });
+
+// ================= INIT =================
 renderCards();
-applyFilters();
-function toggleMenu(){
-  const nav = document.querySelector('.header-nav');
-  nav.classList.toggle('show');
-}
+showQuote(0);
 </script>
 </body>
 </html>
