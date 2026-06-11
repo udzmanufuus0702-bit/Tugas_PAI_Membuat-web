@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Warisan Ilmu — Tokoh Cendekiawan Islam</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Lato:wght@300;400;700&family=Noto+Serif:ital,wght@0,400;1,400&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg:#0B1220; --bg2:#111926; --gold:#C9A96E; --gold-light:#E0C48A;
+      --cream:#E8DCC8; --blue-steel:#2A3F5F; --silver-blue:#6B8F9E;
+      --text:#D6C9B4; --muted:#7A8FA0; --card-bg:#141E2E;
+      --card-border:rgba(201,169,110,0.18); --radius:10px;
+    }
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+    body{background:var(--bg);color:var(--text);font-family:'Lato',sans-serif;font-weight:300;line-height:1.65;min-height:100vh;}
+    .star-pattern{position:fixed;inset:0;pointer-events:none;z-index:0;opacity:0.04;
+      background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='80'%3E%3Cpolygon points='40,5 47,30 72,30 52,46 59,71 40,56 21,71 28,46 8,30 33,30' fill='%23C9A96E'/%3E%3C/svg%3E");
+      background-size:80px 80px;}
+
+    /* LAYER 1 - HEADER */
+    header{position:relative;z-index:10;text-align:center;padding:64px 24px 52px;
+      border-bottom:1px solid rgba(201,169,110,0.15);
+      background:linear-gradient(180deg,rgba(11,18,32,0.98),rgba(17,25,38,0.85));}
+    .header-ornament{display:flex;align-items:center;justify-content:center;gap:18px;margin-bottom:22px;}
+    .ornament-line{height:1px;width:80px;background:linear-gradient(90deg,transparent,var(--gold),transparent);}
+    .ornament-diamond{width:10px;height:10px;background:var(--gold);transform:rotate(45deg);flex-shrink:0;}
+    header h1{font-family:'Cinzel',serif;font-size:clamp(2rem,5vw,3.2rem);font-weight:700;letter-spacing:0.06em;
+      color:var(--gold-light);text-shadow:0 0 40px rgba(201,169,110,0.3);margin-bottom:10px;}
+    header .tagline{font-family:'Noto Serif',serif;font-style:italic;color:var(--silver-blue);
+      font-size:1rem;letter-spacing:0.04em;margin-bottom:28px;}
+    .header-nav{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;}
+    .nav-link{font-size:0.75rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);
+      text-decoration:none;padding:5px 14px;border:1px solid rgba(255,255,255,0.07);
+      border-radius:40px;transition:color 0.2s,border-color 0.2s;}
+    .nav-link:hover{color:var(--gold);border-color:var(--gold);}
+
+    /* LAYER 2 - STATISTIK */
+    .stats-section{position:relative;z-index:10;background:var(--bg2);
+      border-bottom:1px solid rgba(201,169,110,0.08);padding:36px 24px;}
+    .stats-inner{max-width:900px;margin:0 auto;display:grid;grid-template-columns:repeat(4,1fr);gap:0;}
+    .stat-item{text-align:center;padding:14px 10px;border-right:1px solid rgba(201,169,110,0.1);}
+    .stat-item:last-child{border-right:none;}
+    .stat-num{font-family:'Cinzel',serif;font-size:clamp(1.6rem,3vw,2.4rem);font-weight:700;
+      color:var(--gold);display:block;line-height:1;margin-bottom:6px;}
+    .stat-label{font-size:0.72rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);}
+    @media(max-width:560px){
+      .stats-inner{grid-template-columns:repeat(2,1fr);}
+      .stat-item:nth-child(2){border-right:none;}
+      .stat-item:nth-child(3){border-right:1px solid rgba(201,169,110,0.1);}
+    }
+
+    /* LAYER 3 - INTRO (Left-Right) */
+    .intro-section{position:relative;z-index:10;padding:52px 24px;
+      background:linear-gradient(180deg,var(--bg2) 0%,var(--bg) 100%);
+      border-bottom:1px solid rgba(201,169,110,0.08);}
+    .intro-inner{max-width:1100px;margin:0 auto;display:grid;
+      grid-template-columns:1fr 1fr 1fr;gap:40px;align-items:start;}
+    .intro-heading{grid-column:1/2;}
+    .section-eyebrow{font-size:0.68rem;letter-spacing:0.18em;text-transform:uppercase;
+      color:var(--gold);display:block;margin-bottom:12px;font-family:'Cinzel',serif;}
+    .intro-heading h2{font-family:'Cinzel',serif;font-size:clamp(1.3rem,2.5vw,1.9rem);
+      font-weight:600;color:var(--cream);line-height:1.3;}
+    .intro-text{grid-column:2/4;display:grid;grid-template-columns:1fr 1fr;gap:24px;}
+    .intro-text p{font-size:0.9rem;color:var(--muted);line-height:1.75;}
+    @media(max-width:760px){
+      .intro-inner{grid-template-columns:1fr;}
+      .intro-heading,.intro-text{grid-column:1;}
+      .intro-text{grid-template-columns:1fr;}
+    }
+
+    /* LAYER 4 - FILTER + CARDS */
+    .filter-bar{position:relative;z-index:10;display:flex;flex-wrap:wrap;gap:10px;
+      justify-content:center;padding:28px 24px 20px;}
+    .filter-btn{background:transparent;border:1px solid var(--card-border);color:var(--muted);
+      font-family:'Lato',sans-serif;font-size:0.8rem;letter-spacing:0.06em;
+      text-transform:uppercase;padding:7px 18px;border-radius:40px;cursor:pointer;transition:all 0.25s;}
+    .filter-btn:hover{border-color:var(--gold);color:var(--gold);}
+    .filter-btn.active{background:var(--gold);border-color:var(--gold);color:var(--bg);font-weight:700;}
+    .section-label{position:relative;z-index:10;max-width:1140px;margin:0 auto 6px;padding:0 24px;}
+    .section-label-inner{display:flex;align-items:center;gap:14px;padding-bottom:10px;
+      border-bottom:1px solid rgba(201,169,110,0.1);}
+    .section-label-inner span{font-family:'Cinzel',serif;font-size:0.7rem;letter-spacing:0.18em;
+      text-transform:uppercase;color:var(--gold);}
+    .section-label-inner .count{font-family:'Lato',sans-serif;font-size:0.72rem;color:var(--muted);}
+    .grid-section{position:relative;z-index:10;max-width:1140px;margin:0 auto;
+      padding:12px 24px 60px;display:grid;
+      grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:24px;}
+    .card{background:var(--card-bg);border:1px solid var(--card-border);border-radius:var(--radius);
+      overflow:hidden;cursor:pointer;transition:transform 0.25s,box-shadow 0.25s,border-color 0.25s;
+      display:flex;flex-direction:column;}
+    .card:hover{transform:translateY(-5px);box-shadow:0 16px 48px rgba(0,0,0,0.45),0 0 0 1px var(--gold);border-color:var(--gold);}
+    .card:focus-visible{outline:2px solid var(--gold);outline-offset:2px;}
+    .card-image{height:200px;background-size:cover;background-position:center top;position:relative;flex-shrink:0;}
+    .card-image::after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,transparent 40%,var(--card-bg));}
+    .card-image-placeholder{height:200px;background:linear-gradient(135deg,var(--blue-steel) 0%,#0f1c30 100%);
+      display:flex;align-items:center;justify-content:center;font-family:'Cinzel',serif;
+      font-size:3rem;color:rgba(201,169,110,0.3);flex-shrink:0;}
+    .card-body{padding:18px 20px 20px;flex:1;display:flex;flex-direction:column;}
+    .card-badge{display:inline-block;font-size:0.68rem;letter-spacing:0.1em;text-transform:uppercase;
+      color:var(--gold);border:1px solid rgba(201,169,110,0.35);border-radius:40px;
+      padding:2px 10px;margin-bottom:10px;}
+    .card h2{font-family:'Cinzel',serif;font-size:1.08rem;font-weight:600;color:var(--cream);
+      margin-bottom:4px;line-height:1.3;}
+    .card-year{font-size:0.78rem;color:var(--silver-blue);margin-bottom:12px;font-style:italic;}
+    .card p{font-size:0.87rem;color:var(--muted);line-height:1.5;flex:1;
+      display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden;}
+    .card-footer{margin-top:16px;display:flex;align-items:center;justify-content:space-between;}
+    .card-field{font-size:0.75rem;color:var(--silver-blue);}
+    .more{background:transparent;border:1px solid var(--gold);color:var(--gold);font-family:'Lato',sans-serif;
+      font-size:0.75rem;letter-spacing:0.06em;text-transform:uppercase;padding:5px 14px;
+      border-radius:6px;cursor:pointer;transition:background 0.2s,color 0.2s;}
+    .more:hover{background:var(--gold);color:var(--bg);}
+
+    /* LAYER 5 - KUTIPAN */
+    .quote-section{position:relative;z-index:10;background:var(--bg2);
+      border-top:1px solid rgba(201,169,110,0.1);border-bottom:1px solid rgba(201,169,110,0.1);
+      padding:60px 24px;text-align:center;overflow:hidden;}
+    .quote-section::before{content:'\201C';position:absolute;top:-10px;left:50%;
+      transform:translateX(-50%);font-family:'Cinzel',serif;font-size:14rem;line-height:1;
+      color:rgba(201,169,110,0.04);pointer-events:none;z-index:0;}
+    .quote-inner{position:relative;z-index:1;max-width:700px;margin:0 auto;}
+    .quote-inner blockquote{font-family:'Noto Serif',serif;font-style:italic;
+      font-size:clamp(1.1rem,2.5vw,1.4rem);color:var(--cream);line-height:1.7;margin-bottom:20px;}
+    .quote-attr{font-size:0.78rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--gold);}
+
+    /* LAYER 6 - TIMELINE */
+    .timeline-section{position:relative;z-index:10;padding:60px 24px;background:var(--bg);
+      border-bottom:1px solid rgba(201,169,110,0.08);}
+    .timeline-header{text-align:center;margin-bottom:48px;}
+    .timeline-header h2{font-family:'Cinzel',serif;font-size:clamp(1.2rem,2.5vw,1.7rem);
+      font-weight:600;color:var(--cream);}
+    .timeline{max-width:900px;margin:0 auto;position:relative;}
+    .timeline::before{content:'';position:absolute;left:50%;top:0;bottom:0;width:1px;
+      background:linear-gradient(180deg,transparent,rgba(201,169,110,0.3) 10%,rgba(201,169,110,0.3) 90%,transparent);
+      transform:translateX(-50%);}
+    .tl-item{display:flex;gap:32px;align-items:flex-start;margin-bottom:40px;position:relative;}
+    .tl-item:nth-child(odd){flex-direction:row;}
+    .tl-item:nth-child(even){flex-direction:row-reverse;}
+    .tl-card{flex:0 0 calc(50% - 28px);background:var(--card-bg);
+      border:1px solid var(--card-border);border-radius:var(--radius);padding:18px 20px;}
+    .tl-item:nth-child(odd) .tl-card{text-align:right;}
+    .tl-name{font-family:'Cinzel',serif;font-size:0.95rem;color:var(--gold-light);margin-bottom:4px;}
+    .tl-year{font-size:0.72rem;color:var(--silver-blue);margin-bottom:8px;font-style:italic;}
+    .tl-desc{font-size:0.82rem;color:var(--muted);line-height:1.5;}
+    .tl-dot{flex:0 0 14px;height:14px;background:var(--gold);border-radius:50%;margin-top:20px;
+      position:relative;z-index:1;box-shadow:0 0 0 4px rgba(201,169,110,0.15);}
+    .tl-spacer{flex:0 0 calc(50% - 28px);}
+    @media(max-width:640px){
+      .timeline::before{left:16px;}
+      .tl-item,.tl-item:nth-child(even){flex-direction:row;gap:16px;}
+      .tl-item:nth-child(odd) .tl-card{text-align:left;}
+      .tl-card{flex:1;} .tl-spacer{display:none;}
+      .tl-dot{flex:0 0 14px;margin-top:18px;}
+    }
+
+    /* LAYER 7 - FOOTER */
+    footer{position:relative;z-index:10;background:var(--bg2);
+      border-top:1px solid rgba(201,169,110,0.12);padding:48px 24px 32px;}
+    .footer-inner{max-width:1100px;margin:0 auto;display:grid;
+      grid-template-columns:1fr 1fr 1fr;gap:40px;margin-bottom:36px;}
+    .footer-col h4{font-family:'Cinzel',serif;font-size:0.75rem;letter-spacing:0.14em;
+      text-transform:uppercase;color:var(--gold);margin-bottom:14px;}
+    .footer-col p,.footer-col li{font-size:0.82rem;color:var(--muted);line-height:1.7;list-style:none;}
+    .footer-col ul{padding:0;}
+    .footer-col a{color:var(--silver-blue);text-decoration:none;}
+    .footer-col a:hover{color:var(--gold);}
+    .footer-bottom{max-width:1100px;margin:0 auto;padding-top:24px;
+      border-top:1px solid rgba(255,255,255,0.05);
+      display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;}
+    .footer-bottom p{font-size:0.75rem;color:var(--muted);}
+    @media(max-width:680px){
+      .footer-inner{grid-template-columns:1fr;gap:28px;}
+      .footer-bottom{flex-direction:column;text-align:center;}
+    }
+
+    /* MODAL */
+    .modal{display:none;position:fixed;inset:0;z-index:120;align-items:center;justify-content:center;}
+    .modal[aria-hidden="false"]{display:flex;}
+    .modal-backdrop{position:absolute;inset:0;background:rgba(4,8,18,0.75);backdrop-filter:blur(5px);}
+    .modal-panel{position:relative;width:min(940px,94%);max-height:88vh;overflow-y:auto;
+      border-radius:14px;background:#111926;border:1px solid rgba(201,169,110,0.2);
+      box-shadow:0 30px 80px rgba(0,0,0,0.7),0 0 0 1px rgba(201,169,110,0.08);padding:0;}
+    .modal-panel::before{content:'';display:block;height:3px;
+      background:linear-gradient(90deg,transparent,var(--gold),transparent);border-radius:14px 14px 0 0;}
+    .modal-close{position:absolute;right:14px;top:16px;background:rgba(255,255,255,0.04);
+      border:1px solid rgba(255,255,255,0.08);color:var(--muted);width:32px;height:32px;
+      border-radius:8px;cursor:pointer;font-size:0.9rem;transition:all 0.2s;z-index:2;}
+    .modal-close:hover{background:rgba(201,169,110,0.12);color:var(--gold);border-color:var(--gold);}
+    .modal-content{display:flex;min-height:320px;}
+    .modal-left{flex:0 0 300px;position:relative;}
+    .modal-image{width:100%;height:100%;min-height:280px;background-size:cover;
+      background-position:center top;border-radius:0 0 0 14px;}
+    .modal-image-placeholder{width:100%;min-height:280px;
+      background:linear-gradient(160deg,#1a2d46 0%,#0d1624 100%);
+      display:flex;align-items:center;justify-content:center;font-family:'Cinzel',serif;
+      font-size:5rem;color:rgba(201,169,110,0.2);border-radius:0 0 0 14px;}
+    .modal-left::after{content:'';position:absolute;right:0;top:0;bottom:0;width:60px;
+      background:linear-gradient(90deg,transparent,#111926);pointer-events:none;}
+    .modal-right{flex:1 1 auto;padding:30px 36px 30px 28px;overflow-y:auto;}
+    .modal-right h3{font-family:'Cinzel',serif;font-size:1.55rem;font-weight:600;
+      color:var(--gold-light);margin-bottom:6px;line-height:1.25;}
+    .modal-meta{font-size:0.82rem;color:var(--silver-blue);margin-bottom:18px;letter-spacing:0.04em;}
+    .modal-divider{height:1px;background:linear-gradient(90deg,rgba(201,169,110,0.3),transparent);margin-bottom:18px;}
+    .modal-right p{font-size:0.92rem;color:var(--text);line-height:1.7;margin-bottom:20px;}
+    .modal-right h4{font-family:'Cinzel',serif;font-size:0.78rem;letter-spacing:0.14em;
+      text-transform:uppercase;color:var(--gold);margin-bottom:10px;}
+    .modal-right ul{list-style:none;padding:0;margin-bottom:20px;}
+    .modal-right ul li{font-size:0.87rem;color:var(--text);padding:7px 0 7px 16px;
+      border-left:2px solid rgba(201,169,110,0.3);margin-bottom:6px;}
+    .modal-source{font-size:0.78rem;color:var(--muted);}
+    .modal-source a{color:var(--silver-blue);text-decoration:underline;}
+    @media(max-width:680px){
+      .modal-content{flex-direction:column;} .modal-left{flex:0 0 auto;}
+      .modal-image,.modal-image-placeholder{min-height:200px;border-radius:0;}
+      .modal-left::after{display:none;} .modal-right{padding:20px;}
+    }
+    ::-webkit-scrollbar{width:6px;}
+    ::-webkit-scrollbar-track{background:var(--bg2);}
+    ::-webkit-scrollbar-thumb{background:var(--blue-steel);border-radius:4px;}
+    @media(prefers-reduced-motion:reduce){.card{transition:none;}}
+  </style>
+</head>
+<body>
+<div class="star-pattern" aria-hidden="true"></div>
+
+<!-- LAYER 1: HEADER / HERO -->
+<header>
+  <div class="header-ornament" aria-hidden="true">
+    <div class="ornament-line"></div><div class="ornament-diamond"></div>
+    <svg width="36" height="36" viewBox="0 0 80 80" fill="none">
+      <polygon points="40,4 48,30 74,30 53,47 61,73 40,57 19,73 27,47 6,30 32,30" fill="#C9A96E" opacity="0.85"/>
+    </svg>
+    <div class="ornament-diamond"></div><div class="ornament-line"></div>
+  </div>
+  <h1>Warisan Ilmu</h1>
+  <p class="tagline">Para Cendekiawan yang Menerangi Peradaban</p>
+  <nav class="header-nav" aria-label="Navigasi halaman">
+    <a class="nav-link" href="#statistik">Statistik</a>
+    <a class="nav-link" href="#tentang">Tentang</a>
+    <a class="nav-link" href="#tokoh">Tokoh</a>
+    <a class="nav-link" href="#kutipan">Kutipan</a>
+    <a class="nav-link" href="#timeline">Linimasa</a>
+  </nav>
+</header>
+
+<!-- LAYER 2: STATISTIK -->
+<section id="statistik" class="stats-section" aria-label="Statistik">
+  <div class="stats-inner">
+    <div class="stat-item"><span class="stat-num">8</span><span class="stat-label">Tokoh Cendekiawan</span></div>
+    <div class="stat-item"><span class="stat-num">7</span><span class="stat-label">Bidang Ilmu</span></div>
+    <div class="stat-item"><span class="stat-num">24+</span><span class="stat-label">Karya Utama</span></div>
+    <div class="stat-item"><span class="stat-num">5 Abad</span><span class="stat-label">Masa Kejayaan</span></div>
+  </div>
+</section>
+
+<!-- LAYER 3: TENTANG / INTRO (Left-Right Layout) -->
+<section id="tentang" class="intro-section" aria-label="Tentang">
+  <div class="intro-inner">
+    <div class="intro-heading">
+      <span class="section-eyebrow">Tentang Proyek</span>
+      <h2>Mengenal Para Peletak Dasar Sains Dunia</h2>
+    </div>
+    <div class="intro-text">
+      <p>Antara abad ke-8 hingga ke-13 Masehi, dunia Islam mengalami masa keemasan ilmu pengetahuan. Para cendekiawan Muslim menerjemahkan, mengembangkan, dan memperluas warisan ilmu Yunani, Persia, dan India — lalu meneruskannya ke Eropa melalui Andalusia dan Sisilia.</p>
+      <p>Website ini menampilkan profil singkat tokoh-tokoh yang kontribusinya masih terasa hingga hari ini. Mulai dari aljabar dan algoritma, kedokteran modern, optik, kimia, hingga astronomi — semua berakar dari karya para ilmuwan dalam halaman ini.</p>
+    </div>
+  </div>
+</section>
+
+<!-- LAYER 4: FILTER + GRID KARTU TOKOH -->
+<section id="tokoh" aria-label="Daftar tokoh">
+  <div class="filter-bar" role="group" aria-label="Filter bidang ilmu">
+    <button class="filter-btn active" data-filter="all">Semua</button>
+    <button class="filter-btn" data-filter="matematika">Matematika</button>
+    <button class="filter-btn" data-filter="kedokteran">Kedokteran</button>
+    <button class="filter-btn" data-filter="filsafat">Filsafat</button>
+    <button class="filter-btn" data-filter="astronomi">Astronomi</button>
+    <button class="filter-btn" data-filter="geografi">Geografi</button>
+    <button class="filter-btn" data-filter="kimia">Kimia</button>
+    <button class="filter-btn" data-filter="optik">Optik</button>
+  </div>
+  <div class="section-label">
+    <div class="section-label-inner">
+      <span>Daftar Tokoh</span>
+      <span class="count" id="countLabel">8 tokoh</span>
+    </div>
+  </div>
+  <main class="grid-section" id="grid" role="list"></main>
+</section>
+
+<!-- LAYER 5: KUTIPAN INSPIRATIF -->
+<section id="kutipan" class="quote-section" aria-label="Kutipan">
+  <div class="quote-inner">
+    <blockquote id="quoteText">"Mencari ilmu adalah kewajiban setiap Muslim."</blockquote>
+    <p class="quote-attr" id="quoteAttr">— Hadis Riwayat Ibnu Majah</p>
+    <div style="margin-top:24px;display:flex;gap:8px;justify-content:center;flex-wrap:wrap" id="quoteDots"></div>
+  </div>
+</section>
+
+<!-- LAYER 6: TIMELINE LINIMASA -->
+<section id="timeline" class="timeline-section" aria-label="Linimasa">
+  <div class="timeline-header">
+    <span class="section-eyebrow">Linimasa</span>
+    <h2>Urutan Kronologi Tokoh</h2>
+  </div>
+  <div class="timeline" id="timelineContainer"></div>
+</section>
+
+<!-- LAYER 7: FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-col">
+      <h4>Warisan Ilmu</h4>
+      <p>Ensiklopedia digital tokoh cendekiawan Islam klasik yang meletakkan dasar sains dan filsafat dunia modern.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Bidang yang Tercakup</h4>
+      <ul>
+        <li>Matematika &amp; Aljabar</li>
+        <li>Kedokteran &amp; Farmakologi</li>
+        <li>Optik &amp; Fisika</li>
+        <li>Astronomi &amp; Geografi</li>
+        <li>Filsafat &amp; Logika</li>
+        <li>Kimia &amp; Alkhemi</li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Sumber Referensi</h4>
+      <ul>
+        <li><a href="https://id.wikipedia.org" target="_blank" rel="noopener">Wikipedia Bahasa Indonesia</a></li>
+        <li><a href="https://www.britannica.com" target="_blank" rel="noopener">Encyclopaedia Britannica</a></li>
+        <li><a href="https://www.muslimheritage.com" target="_blank" rel="noopener">Muslim Heritage</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>&#169; 2026 Warisan Ilmu &mdash; Dibuat untuk keperluan tugas akademik</p>
+    <p>Data bersumber dari sumber sejarah terpercaya</p>
+  </div>
+</footer>
+
+<!-- MODAL -->
+<div id="modal" class="modal" aria-hidden="true" role="dialog" aria-labelledby="modalTitle">
+  <div class="modal-backdrop" id="modalBackdrop"></div>
+  <div class="modal-panel" role="document">
+    <button class="modal-close" id="modalClose" aria-label="Tutup detail">&#10005;</button>
+    <div class="modal-content">
+      <div class="modal-left"><div class="modal-image" id="modalImage" aria-hidden="true"></div></div>
+      <div class="modal-right">
+        <h3 id="modalTitle">Nama Tokoh</h3>
+        <p class="modal-meta" id="modalMeta">Bidang - Tahun</p>
+        <div class="modal-divider"></div>
+        <p id="modalBio">Ringkasan singkat tentang tokoh.</p>
+        <h4>Karya Utama</h4>
+        <ul id="modalWorks"><li>Nama Karya - Tahun</li></ul>
+        <p class="modal-source" id="modalSource">Sumber: <a href="#" target="_blank" rel="noopener">-</a></p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+const tokohData=[
+  {name:"Al-Khwarizmi",field:"matematika",fieldLabel:"Matematika",years:"780-850 M",startYear:780,initial:"\u062e",image:"",
+   bio:"Muhammad bin Musa Al-Khwarizmi adalah matematikawan dan astronom Persia dari Baghdad. Dikenal sebagai Bapak Aljabar, namanya menjadi asal kata algoritma (algorithm) dalam bahasa modern.",
+   contribution:"Penemu aljabar dan pengenalan sistem numerasi Hindu-Arab ke dunia Barat.",
+   works:[{title:"Al-Kitab al-Mukhtasar fi Hisab al-Jabr wal-Muqabala",year:"820"},{title:"Kitab al-Jam' wa al-Tafriq bi Hisab al-Hind",year:"825"},{title:"Zij al-Sindhind (Tabel Astronomi)",year:"830"}],
+   source:{text:"Wikipedia - Al-Khwarizmi",url:"https://id.wikipedia.org/wiki/Al-Khwarizmi"}},
+  {name:"Jabir ibn Hayyan",field:"kimia",fieldLabel:"Kimia",years:"721-815 M",startYear:721,initial:"\u062c",image:"",
+   bio:"Abu Musa Jabir ibn Hayyan (Geber) adalah Bapak Kimia. Ia menemukan asam sulfat, asam nitrat, dan aqua regia, serta mengembangkan teknik laboratorium dasar yang masih digunakan hingga kini.",
+   contribution:"Meletakkan fondasi ilmu kimia eksperimental modern.",
+   works:[{title:"Kitab al-Kimya (Buku Kimia)",year:"778"},{title:"Kitab al-Sab'een (Tujuh Puluh Buku)",year:"785"},{title:"Al-Khawas al-Kabir",year:"790"}],
+   source:{text:"Wikipedia - Jabir ibn Hayyan",url:"https://id.wikipedia.org/wiki/Jabir_ibn_Hayyan"}},
+  {name:"Al-Battani",field:"astronomi",fieldLabel:"Astronomi",years:"858-929 M",startYear:858,initial:"\u0637",image:"",
+   bio:"Al-Battani memperbaiki pengukuran astronomi Ptolemeus, menentukan panjang tahun matahari dengan presisi tinggi, dan memperkenalkan fungsi trigonometri sinus dan kotangen.",
+   contribution:"Merevisi tabel astronomi Ptolemeus dengan presisi lebih tinggi.",
+   works:[{title:"Kitab al-Zij al-Sabi'",year:"900"},{title:"Syarh al-Arba' Maqalat Batalmus",year:"910"},{title:"Risalah fi Tahqiq Miqdar al-Ittisalat",year:"915"}],
+   source:{text:"Wikipedia - Al-Battani",url:"https://id.wikipedia.org/wiki/Al-Battani"}},
+  {name:"Al-Farabi",field:"filsafat",fieldLabel:"Filsafat & Musik",years:"872-950 M",startYear:872,initial:"\u0641",image:"",
+   bio:"Al-Farabi dijuluki Al-Mu'allim al-Tsani (Guru Kedua) setelah Aristoteles. Ia menjembatani filsafat Yunani dengan pemikiran Islam dan mengembangkan teori musik serta ilmu politik.",
+   contribution:"Menjembatani filsafat Yunani-Islam, pengaruh besar terhadap Ibnu Sina.",
+   works:[{title:"Ara' Ahl al-Madina al-Fadila (Negara Utama)",year:"940"},{title:"Kitab al-Musiqa al-Kabir",year:"930"},{title:"Ihsa' al-'Ulum (Klasifikasi Ilmu)",year:"935"}],
+   source:{text:"Wikipedia - Al-Farabi",url:"https://id.wikipedia.org/wiki/Al-Farabi"}},
+  {name:"Ibnu Sina",field:"kedokteran",fieldLabel:"Kedokteran",years:"980-1037 M",startYear:980,initial:"\u0633",image:"",
+   bio:"Dikenal di Barat sebagai Avicenna, Ibnu Sina adalah dokter dan filsuf Persia paling berpengaruh. Karyanya Al-Qanun fi al-Tibb menjadi buku teks kedokteran standar di Eropa selama enam abad.",
+   contribution:"Menulis ensiklopedia kedokteran yang menjadi rujukan Eropa selama 600 tahun.",
+   works:[{title:"Al-Qanun fi al-Tibb (Canon of Medicine)",year:"1025"},{title:"Kitab al-Shifa (Book of Healing)",year:"1027"},{title:"Al-Najat",year:"1030"}],
+   source:{text:"Wikipedia - Ibnu Sina",url:"https://id.wikipedia.org/wiki/Ibnu_Sina"}},
+  {name:"Al-Haitham",field:"optik",fieldLabel:"Optik & Fisika",years:"965-1040 M",startYear:965,initial:"\u0647",image:"",
+   bio:"Hasan Ibn al-Haitham (Alhazen) meletakkan dasar ilmu optik modern. Melalui eksperimen camera obscura, ia membuktikan bahwa cahaya masuk ke mata dari objek bukan sebaliknya.",
+   contribution:"Bapak Optik modern, pelopor metode eksperimental ilmiah.",
+   works:[{title:"Kitab al-Manazir (Buku Optik)",year:"1015"},{title:"Al-Shukuk 'ala Batlamyus",year:"1025"},{title:"Maqalah fi al-Daw' (Risalah Cahaya)",year:"1010"}],
+   source:{text:"Wikipedia - Ibn al-Haytham",url:"https://id.wikipedia.org/wiki/Ibnu_al-Haytham"}},
+  {name:"Al-Biruni",field:"geografi",fieldLabel:"Geografi & Astronomi",years:"973-1048 M",startYear:973,initial:"\u0628",image:"",
+   bio:"Al-Biruni adalah ilmuwan universal yang menguasai fisika, matematika, astronomi, dan sejarah. Ia memperkirakan keliling Bumi dan mencatat bahwa Bumi berputar pada porosnya.",
+   contribution:"Ilmuwan universal, memperkirakan keliling Bumi dengan presisi luar biasa.",
+   works:[{title:"Kitab al-Qanun al-Mas'udi",year:"1030"},{title:"Al-Athar al-Baqiya",year:"1000"},{title:"Kitab al-Hind (Tentang India)",year:"1017"}],
+   source:{text:"Wikipedia - Al-Biruni",url:"https://id.wikipedia.org/wiki/Al-Biruni"}},
+  {name:"Ibnu Rusyd",field:"filsafat",fieldLabel:"Filsafat",years:"1126-1198 M",startYear:1126,initial:"\u0631",image:"",
+   bio:"Dikenal sebagai Averroes di Barat, Ibnu Rusyd adalah filsuf dan dokter Andalusia. Komentarnya atas karya Aristoteles sangat memengaruhi filsafat Eropa abad pertengahan.",
+   contribution:"Komentar Aristoteles-nya membuka jalan bagi Renaisans Eropa.",
+   works:[{title:"Tahafut al-Tahafut",year:"1180"},{title:"Kulliyat fi al-Tibb",year:"1162"},{title:"Komentar atas Aristoteles",year:"1169"}],
+   source:{text:"Wikipedia - Ibnu Rusyd",url:"https://id.wikipedia.org/wiki/Ibnu_Rusyd"}}
+];
+
+const quotes=[
+  {text:"Mencari ilmu adalah kewajiban setiap Muslim.",attr:"— Hadis Riwayat Ibnu Majah"},
+  {text:"Barangsiapa menempuh jalan untuk mencari ilmu, Allah akan mudahkan baginya jalan menuju surga.",attr:"— Hadis Riwayat Muslim"},
+  {text:"Tinta seorang ilmuwan lebih suci daripada darah syuhada.",attr:"— Pepatah Islam Klasik"},
+  {text:"Ilmu adalah kehidupan Islam dan tiang keimanan.",attr:"— Imam Ali bin Abi Thalib"}
+];
+
+function renderCards(filter){
+  filter=filter||'all';
+  const grid=document.getElementById('grid');
+  const countLabel=document.getElementById('countLabel');
+  const filtered=filter==='all'?tokohData:tokohData.filter(function(t){return t.field===filter;});
+  countLabel.textContent=filtered.length+' tokoh';
+  grid.innerHTML='';
+  filtered.forEach(function(tokoh){
+    const card=document.createElement('article');
+    card.className='card'; card.dataset.name=tokoh.name;
+    card.setAttribute('tabindex','0'); card.setAttribute('role','listitem');
+    card.setAttribute('aria-label',tokoh.name+', '+tokoh.fieldLabel);
+    const imageHtml=tokoh.image
+      ?'<div class="card-image" style="background-image:url(\''+tokoh.image+'\')"></div>'
+      :'<div class="card-image-placeholder" aria-hidden="true">'+tokoh.initial+'</div>';
+    card.innerHTML=imageHtml+
+      '<div class="card-body">'+
+        '<span class="card-badge">'+tokoh.fieldLabel+'</span>'+
+        '<h2>'+tokoh.name+'</h2>'+
+        '<p class="card-year">'+tokoh.years+'</p>'+
+        '<p>'+tokoh.bio+'</p>'+
+        '<div class="card-footer">'+
+          '<span class="card-field">&#128220; '+tokoh.works.length+' karya</span>'+
+          '<button class="more" aria-label="Lihat detail '+tokoh.name+'">Selengkapnya</button>'+
+        '</div>'+
+      '</div>';
+    card.querySelector('.more').addEventListener('click',function(e){e.stopPropagation();openModalFor(tokoh.name);});
+    card.addEventListener('click',function(){openModalFor(tokoh.name);});
+    card.addEventListener('keydown',function(e){if(e.key==='Enter'||e.key===' '){e.preventDefault();openModalFor(tokoh.name);}});
+    grid.appendChild(card);
+  });
+}
+
+document.querySelectorAll('.filter-btn').forEach(function(btn){
+  btn.addEventListener('click',function(){
+    document.querySelectorAll('.filter-btn').forEach(function(b){b.classList.remove('active');});
+    btn.classList.add('active');
+    renderCards(btn.dataset.filter);
+  });
+});
+
+var qIdx=0;
+function showQuote(i){
+  var qt=document.getElementById('quoteText');
+  var qa=document.getElementById('quoteAttr');
+  qt.style.opacity='0'; qa.style.opacity='0';
+  setTimeout(function(){
+    qt.textContent='"'+quotes[i].text+'"';
+    qa.textContent=quotes[i].attr;
+    qt.style.transition='opacity 0.5s'; qa.style.transition='opacity 0.5s';
+    qt.style.opacity='1'; qa.style.opacity='1';
+  },300);
+  document.querySelectorAll('.q-dot').forEach(function(d,j){
+    d.style.background=j===i?'var(--gold)':'rgba(201,169,110,0.2)';
+  });
+}
+var dotsEl=document.getElementById('quoteDots');
+quotes.forEach(function(_,i){
+  var d=document.createElement('button');
+  d.className='q-dot';
+  d.style.cssText='width:8px;height:8px;border-radius:50%;border:none;cursor:pointer;background:'+(i===0?'var(--gold)':'rgba(201,169,110,0.2)')+';padding:0;transition:background 0.3s;';
+  d.setAttribute('aria-label','Kutipan '+(i+1));
+  d.addEventListener('click',function(){qIdx=i;showQuote(i);});
+  dotsEl.appendChild(d);
+});
+setInterval(function(){qIdx=(qIdx+1)%quotes.length;showQuote(qIdx);},5000);
+
+var sorted=tokohData.slice().sort(function(a,b){return a.startYear-b.startYear;});
+var container=document.getElementById('timelineContainer');
+sorted.forEach(function(t,i){
+  var item=document.createElement('div');
+  item.className='tl-item';
+  var isOdd=i%2===0;
+  item.innerHTML=isOdd
+    ?'<div class="tl-card"><div class="tl-name">'+t.name+'</div><div class="tl-year">'+t.years+'</div><div class="tl-desc">'+t.contribution+'</div></div><div class="tl-dot"></div><div class="tl-spacer"></div>'
+    :'<div class="tl-spacer"></div><div class="tl-dot"></div><div class="tl-card"><div class="tl-name">'+t.name+'</div><div class="tl-year">'+t.years+'</div><div class="tl-desc">'+t.contribution+'</div></div>';
+  container.appendChild(item);
+});
+
+var modal=document.getElementById('modal');
+var modalBackdrop=document.getElementById('modalBackdrop');
+var modalClose=document.getElementById('modalClose');
+var modalImage=document.getElementById('modalImage');
+var modalTitle=document.getElementById('modalTitle');
+var modalMeta=document.getElementById('modalMeta');
+var modalBio=document.getElementById('modalBio');
+var modalWorks=document.getElementById('modalWorks');
+var modalSource=document.getElementById('modalSource');
+
+function openModalFor(name){
+  var data=null;
+  tokohData.forEach(function(t){if(t.name===name)data=t;});
+  if(!data){
+    modalTitle.textContent=name; modalMeta.textContent='';
+    modalBio.textContent='Informasi belum tersedia.';
+    modalWorks.innerHTML='<li>Belum ada data</li>';
+    modalImage.style.backgroundImage=''; modalImage.innerHTML='';
+    modalSource.innerHTML='Sumber: -';
+  } else {
+    modalTitle.textContent=data.name;
+    modalMeta.textContent=data.fieldLabel+' - '+data.years;
+    modalBio.textContent=data.bio;
+    modalWorks.innerHTML=data.works.map(function(w){return '<li>'+w.title+' <em style="color:var(--silver-blue)">- '+w.year+'</em></li>';}).join('');
+    if(data.image){
+      modalImage.style.backgroundImage='url(\''+data.image+'\')';
+      modalImage.innerHTML=''; modalImage.className='modal-image';
+    } else {
+      modalImage.className=''; modalImage.style.backgroundImage='';
+      modalImage.innerHTML='<div class="modal-image-placeholder" aria-hidden="true">'+data.initial+'</div>';
+    }
+    modalSource.innerHTML='Sumber: <a href="'+data.source.url+'" target="_blank" rel="noopener">'+data.source.text+'</a>';
+  }
+  modal.setAttribute('aria-hidden','false');
+  modalClose.focus();
+  document.body.style.overflow='hidden';
+}
+function closeModal(){modal.setAttribute('aria-hidden','true');document.body.style.overflow='';}
+modalClose.addEventListener('click',closeModal);
+modalBackdrop.addEventListener('click',closeModal);
+document.addEventListener('keydown',function(e){if(e.key==='Escape'&&modal.getAttribute('aria-hidden')==='false')closeModal();});
+
+renderCards();
+</script>
+</body>
+</html>
