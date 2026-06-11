@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Warisan Ilmu — Tokoh Cendekiawan Islam</title>
+  <title>Jejak Ilmuwan Muslim Dunia</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Lato:wght@300;400;700&family=Noto+Serif:ital,wght@0,400;1,400&display=swap" rel="stylesheet" />
   <style>
@@ -30,7 +30,33 @@
       color:var(--gold-light);text-shadow:0 0 40px rgba(201,169,110,0.3);margin-bottom:10px;}
     header .tagline{font-family:'Noto Serif',serif;font-style:italic;color:var(--silver-blue);
       font-size:1rem;letter-spacing:0.04em;margin-bottom:28px;}
-    .header-nav{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;}
+    .header-nav{
+  display:none;
+  position:absolute;
+  top:60px;
+  left:20px;
+
+  background:var(--card-bg);
+  padding:12px;
+  border-radius:10px;
+
+  flex-direction:column;
+  gap:8px;
+
+  border:1px solid rgba(201,169,110,0.15);
+  box-shadow:0 10px 30px rgba(0,0,0,0.5);
+
+  min-width:160px;
+
+  opacity:0;
+  transform:translateY(-10px);
+  transition:all 0.3s ease;
+}
+    .header-nav.show{
+  display:flex;
+  opacity:1;
+  transform:translateY(0);
+}
     .nav-link{font-size:0.75rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);
       text-decoration:none;padding:5px 14px;border:1px solid rgba(255,255,255,0.07);
       border-radius:40px;transition:color 0.2s,border-color 0.2s;}
@@ -227,16 +253,26 @@
 
 <!-- LAYER 1: HEADER / HERO -->
 <header>
-  <div class="header-ornament" aria-hidden="true">
-    <div class="ornament-line"></div><div class="ornament-diamond"></div>
-    <svg width="36" height="36" viewBox="0 0 80 80" fill="none">
-      <polygon points="40,4 48,30 74,30 53,47 61,73 40,57 19,73 27,47 6,30 32,30" fill="#C9A96E" opacity="0.85"/>
-    </svg>
-    <div class="ornament-diamond"></div><div class="ornament-line"></div>
+
+  <!-- HAMBURGER MENU -->
+  <div style="position:absolute;left:20px;top:20px;">
+    <button onclick="toggleMenu()" style="font-size:20px;background:none;border:none;color:white;cursor:pointer;">☰</button>
   </div>
-  <h1>Warisan Ilmu</h1>
-  <p class="tagline">Para Cendekiawan yang Menerangi Peradaban</p>
-  <nav class="header-nav" aria-label="Navigasi halaman">
+
+  <div class="header-ornament" aria-hidden="true">
+    <div class="ornament-line"></div>
+    <div class="ornament-diamond"></div>
+    <svg width="36" height="36" viewBox="0 0 80 80" fill="none">
+      <polygon points="40,4 48,30 74,30 53,47 61,73 40,57 19,73 27,47 6,30 32,30" fill="#C9A96E"/>
+    </svg>
+    <div class="ornament-diamond"></div>
+    <div class="ornament-line"></div>
+  </div>
+
+  <h1>Jejak Ilmuwan Muslim Dunia</h1>
+  <p class="tagline">Perjalanan Tokoh yang Mengubah Ilmu Pengetahuan Dunia</p>
+
+  <nav class="header-nav">
     <a class="nav-link" href="#statistik">Statistik</a>
     <a class="nav-link" href="#tentang">Tentang</a>
     <a class="nav-link" href="#tokoh">Tokoh</a>
@@ -260,11 +296,11 @@
   <div class="intro-inner">
     <div class="intro-heading">
       <span class="section-eyebrow">Tentang Proyek</span>
-      <h2>Mengenal Para Peletak Dasar Sains Dunia</h2>
+      <h2>Peran Ilmuwan Muslim dalam Perkembangan Ilmu Pengetahuan</h2>
     </div>
     <div class="intro-text">
-      <p>Antara abad ke-8 hingga ke-13 Masehi, dunia Islam mengalami masa keemasan ilmu pengetahuan. Para cendekiawan Muslim menerjemahkan, mengembangkan, dan memperluas warisan ilmu Yunani, Persia, dan India — lalu meneruskannya ke Eropa melalui Andalusia dan Sisilia.</p>
-      <p>Website ini menampilkan profil singkat tokoh-tokoh yang kontribusinya masih terasa hingga hari ini. Mulai dari aljabar dan algoritma, kedokteran modern, optik, kimia, hingga astronomi — semua berakar dari karya para ilmuwan dalam halaman ini.</p>
+      <p>Antara abad ke-8 hingga ke-13 Masehi, dunia Islam mengalami masa keemasan ilmu pengetahuan. Para cendekiawan Muslim menerjemahkan, mengembangkan, dan memperluas warisan ilmu Yunani, Persia, dan India lalu meneruskannya ke Eropa melalui Andalusia dan Sisilia.</p>
+      <p>Website ini menampilkan profil singkat tokoh-tokoh yang kontribusinya masih terasa hingga hari ini. Mulai dari aljabar dan algoritma, kedokteran modern, optik, kimia, hingga astronomi dan semua berakar dari karya para ilmuwan dalam halaman ini.</p>
     </div>
   </div>
 </section>
@@ -336,8 +372,8 @@
     </div>
   </div>
   <div class="footer-bottom">
-    <p>&#169; 2026 Warisan Ilmu &mdash; Dibuat untuk keperluan tugas akademik</p>
-    <p>Data bersumber dari sumber sejarah terpercaya</p>
+    <p>&#169; 2026 Jejak Ilmuwan Muslim Dunia — Dibuat untuk keperluan tugas akademik</p>
+    <p>Nama: Udzma Fithratun Nufuus | NIM: K3525076 | Mata Kuliah: PAI</p>
   </div>
 </footer>
 
@@ -363,42 +399,42 @@
 
 <script>
 const tokohData=[
-  {name:"Al-Khwarizmi",field:"matematika",fieldLabel:"Matematika",years:"780-850 M",startYear:780,initial:"\u062e",image:"",
+  {name:"Al-Khwarizmi",field:"matematika",fieldLabel:"Matematika",years:"780-850 M",startYear:780,initial:"\u062e",image:"https://i.ibb.co.com/tTgwrZDq/al-khawarizmi.png",
    bio:"Muhammad bin Musa Al-Khwarizmi adalah matematikawan dan astronom Persia dari Baghdad. Dikenal sebagai Bapak Aljabar, namanya menjadi asal kata algoritma (algorithm) dalam bahasa modern.",
    contribution:"Penemu aljabar dan pengenalan sistem numerasi Hindu-Arab ke dunia Barat.",
    works:[{title:"Al-Kitab al-Mukhtasar fi Hisab al-Jabr wal-Muqabala",year:"820"},{title:"Kitab al-Jam' wa al-Tafriq bi Hisab al-Hind",year:"825"},{title:"Zij al-Sindhind (Tabel Astronomi)",year:"830"}],
    source:{text:"Wikipedia - Al-Khwarizmi",url:"https://id.wikipedia.org/wiki/Al-Khwarizmi"}},
-  {name:"Jabir ibn Hayyan",field:"kimia",fieldLabel:"Kimia",years:"721-815 M",startYear:721,initial:"\u062c",image:"",
+  {name:"Jabir ibn Hayyan",field:"kimia",fieldLabel:"Kimia",years:"721-815 M",startYear:721,initial:"\u062c",image:"https://i.ibb.co.com/zVfLgPKg/jabir-ibnu-hayyan.jpg",
    bio:"Abu Musa Jabir ibn Hayyan (Geber) adalah Bapak Kimia. Ia menemukan asam sulfat, asam nitrat, dan aqua regia, serta mengembangkan teknik laboratorium dasar yang masih digunakan hingga kini.",
    contribution:"Meletakkan fondasi ilmu kimia eksperimental modern.",
    works:[{title:"Kitab al-Kimya (Buku Kimia)",year:"778"},{title:"Kitab al-Sab'een (Tujuh Puluh Buku)",year:"785"},{title:"Al-Khawas al-Kabir",year:"790"}],
    source:{text:"Wikipedia - Jabir ibn Hayyan",url:"https://id.wikipedia.org/wiki/Jabir_ibn_Hayyan"}},
-  {name:"Al-Battani",field:"astronomi",fieldLabel:"Astronomi",years:"858-929 M",startYear:858,initial:"\u0637",image:"",
+  {name:"Al-Battani",field:"astronomi",fieldLabel:"Astronomi",years:"858-929 M",startYear:858,initial:"\u0637",image:"https://i.ibb.co.com/G4wFjv7d/al-battani.jpg",
    bio:"Al-Battani memperbaiki pengukuran astronomi Ptolemeus, menentukan panjang tahun matahari dengan presisi tinggi, dan memperkenalkan fungsi trigonometri sinus dan kotangen.",
    contribution:"Merevisi tabel astronomi Ptolemeus dengan presisi lebih tinggi.",
    works:[{title:"Kitab al-Zij al-Sabi'",year:"900"},{title:"Syarh al-Arba' Maqalat Batalmus",year:"910"},{title:"Risalah fi Tahqiq Miqdar al-Ittisalat",year:"915"}],
    source:{text:"Wikipedia - Al-Battani",url:"https://id.wikipedia.org/wiki/Al-Battani"}},
-  {name:"Al-Farabi",field:"filsafat",fieldLabel:"Filsafat & Musik",years:"872-950 M",startYear:872,initial:"\u0641",image:"",
+  {name:"Al-Farabi",field:"filsafat",fieldLabel:"Filsafat & Musik",years:"872-950 M",startYear:872,initial:"\u0641",image:"https://i.ibb.co.com/TMHv64GZ/al-farabi.png",
    bio:"Al-Farabi dijuluki Al-Mu'allim al-Tsani (Guru Kedua) setelah Aristoteles. Ia menjembatani filsafat Yunani dengan pemikiran Islam dan mengembangkan teori musik serta ilmu politik.",
    contribution:"Menjembatani filsafat Yunani-Islam, pengaruh besar terhadap Ibnu Sina.",
    works:[{title:"Ara' Ahl al-Madina al-Fadila (Negara Utama)",year:"940"},{title:"Kitab al-Musiqa al-Kabir",year:"930"},{title:"Ihsa' al-'Ulum (Klasifikasi Ilmu)",year:"935"}],
    source:{text:"Wikipedia - Al-Farabi",url:"https://id.wikipedia.org/wiki/Al-Farabi"}},
-  {name:"Ibnu Sina",field:"kedokteran",fieldLabel:"Kedokteran",years:"980-1037 M",startYear:980,initial:"\u0633",image:"",
+  {name:"Ibnu Sina",field:"kedokteran",fieldLabel:"Kedokteran",years:"980-1037 M",startYear:980,initial:"\u0633",image:"https://i.ibb.co.com/Nd6X6PXc/ibnu-sina.jpg",
    bio:"Dikenal di Barat sebagai Avicenna, Ibnu Sina adalah dokter dan filsuf Persia paling berpengaruh. Karyanya Al-Qanun fi al-Tibb menjadi buku teks kedokteran standar di Eropa selama enam abad.",
    contribution:"Menulis ensiklopedia kedokteran yang menjadi rujukan Eropa selama 600 tahun.",
    works:[{title:"Al-Qanun fi al-Tibb (Canon of Medicine)",year:"1025"},{title:"Kitab al-Shifa (Book of Healing)",year:"1027"},{title:"Al-Najat",year:"1030"}],
    source:{text:"Wikipedia - Ibnu Sina",url:"https://id.wikipedia.org/wiki/Ibnu_Sina"}},
-  {name:"Al-Haitham",field:"optik",fieldLabel:"Optik & Fisika",years:"965-1040 M",startYear:965,initial:"\u0647",image:"",
+  {name:"Al-Haitham",field:"optik",fieldLabel:"Optik & Fisika",years:"965-1040 M",startYear:965,initial:"\u0647",image:"https://i.ibb.co.com/YBdPxz1b/ibnu-al-haytham.jpg",
    bio:"Hasan Ibn al-Haitham (Alhazen) meletakkan dasar ilmu optik modern. Melalui eksperimen camera obscura, ia membuktikan bahwa cahaya masuk ke mata dari objek bukan sebaliknya.",
    contribution:"Bapak Optik modern, pelopor metode eksperimental ilmiah.",
    works:[{title:"Kitab al-Manazir (Buku Optik)",year:"1015"},{title:"Al-Shukuk 'ala Batlamyus",year:"1025"},{title:"Maqalah fi al-Daw' (Risalah Cahaya)",year:"1010"}],
    source:{text:"Wikipedia - Ibn al-Haytham",url:"https://id.wikipedia.org/wiki/Ibnu_al-Haytham"}},
-  {name:"Al-Biruni",field:"geografi",fieldLabel:"Geografi & Astronomi",years:"973-1048 M",startYear:973,initial:"\u0628",image:"",
+  {name:"Al-Biruni",field:"geografi",fieldLabel:"Geografi & Astronomi",years:"973-1048 M",startYear:973,initial:"\u0628",image:"https://i.ibb.co.com/Hpnsh5NT/al-biruni.jpg",
    bio:"Al-Biruni adalah ilmuwan universal yang menguasai fisika, matematika, astronomi, dan sejarah. Ia memperkirakan keliling Bumi dan mencatat bahwa Bumi berputar pada porosnya.",
    contribution:"Ilmuwan universal, memperkirakan keliling Bumi dengan presisi luar biasa.",
    works:[{title:"Kitab al-Qanun al-Mas'udi",year:"1030"},{title:"Al-Athar al-Baqiya",year:"1000"},{title:"Kitab al-Hind (Tentang India)",year:"1017"}],
    source:{text:"Wikipedia - Al-Biruni",url:"https://id.wikipedia.org/wiki/Al-Biruni"}},
-  {name:"Ibnu Rusyd",field:"filsafat",fieldLabel:"Filsafat",years:"1126-1198 M",startYear:1126,initial:"\u0631",image:"",
+  {name:"Ibnu Rusyd",field:"filsafat",fieldLabel:"Filsafat",years:"1126-1198 M",startYear:1126,initial:"\u0631",image:"https://i.ibb.co.com/9k7HWMww/ibnu-rusyd.jpg",
    bio:"Dikenal sebagai Averroes di Barat, Ibnu Rusyd adalah filsuf dan dokter Andalusia. Komentarnya atas karya Aristoteles sangat memengaruhi filsafat Eropa abad pertengahan.",
    contribution:"Komentar Aristoteles-nya membuka jalan bagi Renaisans Eropa.",
    works:[{title:"Tahafut al-Tahafut",year:"1180"},{title:"Kulliyat fi al-Tibb",year:"1162"},{title:"Komentar atas Aristoteles",year:"1169"}],
@@ -534,6 +570,11 @@ modalBackdrop.addEventListener('click',closeModal);
 document.addEventListener('keydown',function(e){if(e.key==='Escape'&&modal.getAttribute('aria-hidden')==='false')closeModal();});
 
 renderCards();
+
+function toggleMenu(){
+  const nav = document.querySelector('.header-nav');
+  nav.classList.toggle('show');
+}
 </script>
 </body>
 </html>
