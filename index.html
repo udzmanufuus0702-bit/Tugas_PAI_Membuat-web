@@ -67,9 +67,9 @@
 
   min-width:160px;
 
-  opacity: 1;
+  opacity: 0;
   transform:translateY(-10px);
-  pointer-events: auto;
+  pointer-events: none;
   transition:all 0.3s ease;
 }
     .header-nav.show{
@@ -522,6 +522,7 @@ const searchInput = document.getElementById("searchInput");
 
 // ================= FILTER + SEARCH =================
 function getFilteredData() {
+  const q = searchQuery.toLowerCase();
   let filtered = tokohData;
 
   // filter bidang
@@ -530,14 +531,13 @@ function getFilteredData() {
   }
 
   // search
-  if (searchQuery.trim() !== "") {
-    filtered = filtered.filter(t =>
-      t.name.toLowerCase().includes(searchQuery) ||
-      t.bio.toLowerCase().includes(searchQuery) ||
-      t.fieldLabel.toLowerCase().includes(searchQuery)
-    );
-  }
-
+  if (q.trim() !== "") {
+  filtered = filtered.filter(t =>
+    t.name.toLowerCase().includes(q) ||
+    t.bio.toLowerCase().includes(q) ||
+    t.fieldLabel.toLowerCase().includes(q)
+  );
+}
   return filtered;
 }
 
@@ -596,7 +596,7 @@ document.querySelectorAll(".filter-btn").forEach(btn => {
 
 // ================= SEARCH =================
 searchInput.addEventListener("input", (e) => {
-  searchQuery = e.target.value.toLowerCase();
+  searchQuery = e.target.value;
   renderCards();
 });
 
